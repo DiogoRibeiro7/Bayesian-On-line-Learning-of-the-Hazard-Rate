@@ -9,10 +9,17 @@ class ThreeLevelChangePointHierarchy:
         self.pi = pi
         self.Tmax = Tmax
         self.nodes = {}
+        self.data = []
 
     def initialize(self):
-        self.nodes[0] = {(0, 0, 0): 1}  # w(r0=0, a0=0, b0=0, t=0) = 1
+        self.nodes = {(0, 0, 0): 1}  # w(r0=0, a0=0, b0=0, t=0) = 1
         self.Lt = set([(0, 0, 0)])  # nodelist Lt=0 = {N(0, 0, 0, 0)}
+
+    def update_weight(self, nodes, key, value, Lt):
+        if key not in nodes:
+            nodes[key] = 0
+        nodes[key] += value
+        Lt.add(key)
 
     def update_nodes(self, t, x_t):
         new_nodes = {}
@@ -35,12 +42,6 @@ class ThreeLevelChangePointHierarchy:
 
         return new_nodes, Lt
 
-    def update_weight(self, nodes, key, value, Lt):
-        if key not in nodes:
-            nodes[key] = 0
-        nodes[key] += value
-        Lt.add(key)
-
     def normalize_nodes(self, nodes):
         Wtotal = sum(nodes.values())
         for key in nodes:
@@ -54,11 +55,12 @@ class ThreeLevelChangePointHierarchy:
     def predict(self):
         prediction = 0
         for (rt, at, bt), w in self.nodes.items():
-            prediction += self.pi(rt, at, bt) * w
+            prediction += self.pi(rt, at, bt, self.data[-1]) * w
         return prediction
 
     def run(self, data):
         self.initialize()
+        self.data = data  # Store the data for access in predict()
 
         predictions = []
         for t, x_t in enumerate(data, 1):

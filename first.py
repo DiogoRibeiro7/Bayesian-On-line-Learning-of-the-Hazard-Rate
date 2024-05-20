@@ -9,9 +9,10 @@ class ConstantHazardRate:
         self.pi = pi
         self.Tmax = Tmax
         self.nodes = {}
+        self.data = []
 
     def initialize(self):
-        self.nodes[0] = {0: 1}  # w(r0=0, a0=0, t=1) = 1
+        self.nodes = {(0, 0): 1}  # w(r0=0, a0=0, t=1) = 1
         self.Wtotal = 0
         self.Lt = set([(0, 0)])  # nodelist Lt=0 = {N(0, 0, 0)}
 
@@ -47,20 +48,21 @@ class ConstantHazardRate:
             nodes[key] /= Wtotal
         return nodes
 
-    def predict(self, t):
+    def predict(self):
         prediction = 0
         for (rt, at), w in self.nodes.items():
-            prediction += self.pi(rt, at) * w
+            prediction += self.pi(rt, at, self.data[-1]) * w
         return prediction
 
     def run(self, data):
         self.initialize()
+        self.data = data  # Store the data for access in predict()
 
         predictions = []
         for t, x_t in enumerate(data, 1):
             self.nodes, self.Wtotal, self.Lt = self.update_nodes(t, x_t)
             self.nodes = self.normalize_nodes(self.nodes, self.Wtotal)
-            predictions.append(self.predict(t))
+            predictions.append(self.predict())
 
         return predictions
 
