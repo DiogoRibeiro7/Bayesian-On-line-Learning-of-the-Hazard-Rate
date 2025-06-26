@@ -20,6 +20,17 @@ The hazard rate examples rely on `numpy` for generating random data.
 The EM algorithm implementation in :mod:`em.py` uses only the Python
 standard library.
 
+## Installation
+
+Install the project using [Poetry](https://python-poetry.org/):
+
+```bash
+poetry install
+```
+
+This will create a virtual environment with Python 3.8 and install all
+runtime and development dependencies.
+
 ## Author
 
 Diogo Ribeiro ([@DiogoRibeiro7](https://github.com/DiogoRibeiro7))  
