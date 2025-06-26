@@ -16,7 +16,9 @@ predictions over streaming data.
 
 ## Requirements
 
-The examples rely only on `numpy` and the Python standard library.
+The hazard rate examples rely on `numpy` for generating random data.
+The EM algorithm implementation in :mod:`em.py` uses only the Python
+standard library.
 
 ## Author
 
