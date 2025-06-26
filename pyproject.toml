@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "hazard-rate-learning"
+version = "0.1.0"
+description = "Bayesian on-line changepoint detection models with constant hazard rate and hierarchical examples"
+authors = ["Diogo Ribeiro <dfr@esmad.ipp.pt>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+numpy = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
