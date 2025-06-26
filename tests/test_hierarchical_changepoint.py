@@ -53,3 +53,18 @@ def test_normalize_nodes_sum() -> None:
     assert math.isclose(total, 1.0)
 
 
+
+def test_update_nodes_constant_pi() -> None:
+    """Update hierarchy nodes with constant predictive probability."""
+    model = ThreeLevelChangePointHierarchy(H0=0.5, pi=constant_pi, Tmax=1)
+    model.initialize()
+    nodes, Lt = model.update_nodes(1, 1.0)
+    expected = {
+        (1, 0, 1): 0.25,
+        (0, 1, 0): 0.25,
+        (1, 0, 0): 0.25,
+        (0, 0, 1): 0.25,
+    }
+    for key, val in expected.items():
+        assert math.isclose(nodes[key], val)
+    assert len(Lt) == 4

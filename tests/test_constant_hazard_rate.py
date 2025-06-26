@@ -53,3 +53,15 @@ def test_normalize_nodes_sum() -> None:
     assert math.isclose(total, 1.0)
 
 
+
+def test_update_nodes_constant_pi() -> None:
+    """Update nodes with constant predictive probability.
+
+    Ensure the node weights are correctly computed at the first step.
+    """
+    model = ConstantHazardRate(H=0.5, pi=constant_pi, Tmax=1)
+    model.initialize()
+    nodes, Wtotal, Lt = model.update_nodes(1, 1.0)
+    assert math.isclose(nodes[(1, 0)], 0.6)
+    assert math.isclose(nodes[(0, 1)], 0.4)
+    assert math.isclose(Wtotal, 1.0)

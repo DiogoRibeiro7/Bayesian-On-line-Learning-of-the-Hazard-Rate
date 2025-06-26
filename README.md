@@ -34,6 +34,9 @@ Run the tests with `pytest`:
 pytest
 ```
 
+Tests are also executed automatically on each push or pull request via
+GitHub Actions.
+
 All functions are documented using Google-style docstrings with inline
 comments for clarity.
 
