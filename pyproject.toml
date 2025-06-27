@@ -6,7 +6,7 @@ authors = ["Diogo Ribeiro <dfr@esmad.ipp.pt>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 numpy = "*"
 
 [tool.poetry.dev-dependencies]

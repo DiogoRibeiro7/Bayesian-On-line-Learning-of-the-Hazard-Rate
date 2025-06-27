@@ -28,7 +28,7 @@ Install the project using [Poetry](https://python-poetry.org/):
 poetry install
 ```
 
-This will create a virtual environment with Python 3.8 and install all
+This will create a virtual environment with Python 3.10 and install all
 runtime and development dependencies.
 
 ## Author

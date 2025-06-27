@@ -122,7 +122,7 @@ class ConstantHazardRate:
             data (Iterable[float]): Sequence of observed values.
 
         Returns:
-            List[float]: Predictions for each observation.
+            List[float]: The predicted value after each observation.
         """
 
         self.initialize()

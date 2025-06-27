@@ -146,15 +146,18 @@ class ThreeLevelChangePointHierarchy:
             data (Iterable[float]): Sequence of observed values.
 
         Returns:
-            List[float]: Predictions for each observation.
+            List[float]: The predicted value after each observation.
         """
 
+        # Reset internal state before processing the new data
         self.initialize()
-        self.data = data  # Store the data for access in predict()
+        self.data = data  # Store the sequence so ``predict`` can access it
 
         predictions = []
         for t, x_t in enumerate(data, 1):
+            # Update model nodes with the new observation
             self.nodes, self.Lt = self.update_nodes(t, x_t)
+            # Produce a prediction conditioned on the updated state
             predictions.append(self.predict())
 
         return predictions
